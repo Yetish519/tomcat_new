@@ -1,25 +1,28 @@
 pipeline {
     agent {label 'you'}
     stages {
-        stage ('My Build') { 
+        stage('my Build') {
             steps {
-              sh 'mvn package'
-              sh 'pwd'
-              sh 'whoami'
-              sh 'scp -R /home/you/workspace/New_Pipeline/target/hello-world-war-1.0.0.war me@172.31.14.18:/opt/tomcat/webapps/'
+                sh 'docker build -t tomcat_build:${BUILD_NUMBER} .'
             }
-        }
-        stage ('My deploy') { 
-        agent {label 'me'}
+        }  
+        stage('publish stage') {
             steps {
-              sh 'pwd'
-              sh 'whoami'
-              sh 'sudo sh /opt/tomcat/bin/shutdown.sh'
-              sh 'sleep 3'
-              sh 'sudo sh /opt/tomcat/bin/startup.sh'
+                sh "echo ${BUILD_NUMBER}"
+                sh 'docker login -u yetish519 -p Yetibond&519'
+                sh 'docker tomcat_build:${BUILD_NUMBER} yetish519/tomcat_maven:${BUILD_NUMBER}'
+                sh 'docker push yetish519/tomcat_maven:${BUILD_NUMBER}'
             }
-        }
-    }
+        } 
+        stage( 'my deploy' ) {
+        agent {label 'me'} 
+            steps {
+               sh 'docker pull yetish519/tomcat_maven:${BUILD_NUMBER}'
+               sh 'docker rm -f mytomcat'
+               sh 'docker run -d -p 8080:8080 --name mytomcat yetish519/tomcat_maven:${BUILD_NUMBER}'
+            }
+        }    
+    } 
 }
   
       
