@@ -9,7 +9,7 @@ pipeline {
         stage('publish stage') {
             steps {
                 sh "echo ${BUILD_NUMBER}"
-                sh 'docker login -u yetish519 -p Yetibond&519'
+                sh 'docker login -u yetish519 -p yetish@123'
                 sh 'docker tomcat_build:${BUILD_NUMBER} yetish519/tomcat_maven:${BUILD_NUMBER}'
                 sh 'docker push yetish519/tomcat_maven:${BUILD_NUMBER}'
             }
