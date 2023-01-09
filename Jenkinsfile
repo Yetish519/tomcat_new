@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'you'}
+    agent {label you'}
     stages {
         stage('my Build') {
             steps {
@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh "echo ${BUILD_NUMBER}"
                 sh 'docker login -u yetish519 -p yetish@123'
-                sh 'docker tomcat_build:${BUILD_NUMBER} yetish519/tomcat_maven:${BUILD_NUMBER}'
+                sh 'docker tag tomcat_build:${BUILD_NUMBER} yetish519/tomcat_maven:${BUILD_NUMBER}'
                 sh 'docker push yetish519/tomcat_maven:${BUILD_NUMBER}'
             }
         } 
