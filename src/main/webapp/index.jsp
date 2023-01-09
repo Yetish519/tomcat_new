@@ -5,7 +5,7 @@
 <body>
 	<h1>Below are the details about me</h1>
 	<h2>1.Yetish S</h2>
-	<h2>2.Working in Microland from 4 years</h2>
+	<h2>2.Learning Devops</h2>
 	<h2>3.Hobbies: Travelling, playing cricket</h2>
 	<h2>4.Hometown:Karnataka(Bangalore)</h2>
 	<p>
