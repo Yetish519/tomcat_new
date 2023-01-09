@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('my Build') {
             steps {
-                sh 'docker build -t tomcat_build:${BUILD_NUMBER} .'
+                sh 'docker build -t tomcat_build:${BUILD_NUMBER} .' 
             }
         }  
         stage('publish stage') {
